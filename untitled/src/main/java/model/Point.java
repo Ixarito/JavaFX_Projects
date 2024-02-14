@@ -3,7 +3,7 @@ package model;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class Point implements Shape {
+public class Point {
     double x;
     double y;
 
@@ -17,7 +17,7 @@ public class Point implements Shape {
         this.y = p.y;
     }
 
-    void moove(double dx, double dy) {
+    public void move(double dx, double dy) {
         this.x += dx;
         this.y += dy;
     }
@@ -26,18 +26,5 @@ public class Point implements Shape {
         return sqrt(pow((this.x - p.x),2) + pow((this.y - p.y),2));
     }
 
-    @Override
-    public boolean isInside(Point p) {
-        return false;
-    }
 
-    @Override
-    public void move(double dx, double dy) {
-
-    }
-
-    @Override
-    public char getColor() {
-        return 0;
-    }
 }

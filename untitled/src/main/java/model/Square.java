@@ -1,5 +1,8 @@
 package model;
 
-public class Square {
+public class Square extends Rectangle {
+    Square(Point upperLeft, double side, char color) {
+        super(upperLeft, side, side, color);
+    }
 
 }

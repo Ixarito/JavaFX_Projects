@@ -4,22 +4,18 @@ public class Circle extends ColoredShape {
     Point center;
     double radius;
 
-    //TODO
     Circle(Point center, double radius, char color) {
         super(color);
         this.center = center;
         this.radius = radius;
     }
 
-    //todo
-    @Override
     public boolean isInside(Point p) {
-        return false;
+        double distance = center.distanceTo(p);
+        return distance < radius;
     }
 
-    //todo
-    @Override
     public void move(double dx, double dy) {
-
+        center.move(dx, dy);
     }
 }
