@@ -34,7 +34,22 @@ public class Drawing{
     int getHeight(){
         return height;
     }
+
     int getWidth(){
         return width;
+    }
+
+    public void shellDrawAllShapes(){
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
+                Point p = new Point(i, j);
+                if (getShape(p) != null){
+                    System.out.print(getShape(p).getColor());
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
     }
 }
