@@ -4,8 +4,8 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class Point {
-    double x;
-    double y;
+    private double x;
+    private double y;
 
     Point(double x, double y) {
         this.x = x;
@@ -15,6 +15,14 @@ public class Point {
     Point(Point p) {
         this.x = p.x;
         this.y = p.y;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 
     public void move(double dx, double dy) {

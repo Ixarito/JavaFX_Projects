@@ -1,7 +1,7 @@
 package model;
 
 public class AsciiPaint {
-    Drawing drawing;
+    private final Drawing drawing;
 
     AsciiPaint(){
         drawing = new Drawing();
@@ -19,7 +19,7 @@ public class AsciiPaint {
         drawing.addShape(new Rectangle(new Point(x, y), width, height, color));
     }
 
-    public void newSquare(int x, int y, int side, char color){
+    public void newSquare(int x, int y, double side, char color){
         drawing.addShape(new Square(new Point(x, y), side, color));
     }
 

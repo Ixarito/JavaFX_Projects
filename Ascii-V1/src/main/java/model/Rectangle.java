@@ -1,9 +1,9 @@
 package model;
 
 public class Rectangle extends ColoredShape {
-    Point upperLeft;
-    double width;
-    double height;
+    private final Point upperLeft;
+    private final double width;
+    private final double height;
 
     Rectangle(Point upperLeft, double width, double height, char color) {
         super(color);
@@ -13,7 +13,8 @@ public class Rectangle extends ColoredShape {
     }
 
     public boolean isInside(Point p) {
-        return p.x >= upperLeft.x && p.x <= upperLeft.x + width && p.y >= upperLeft.y && p.y <= upperLeft.y + height;
+        return p.getX() >= upperLeft.getX() && p.getX() <= upperLeft.getX() + width && p.getY() >= upperLeft.getY() && p.getY() <= upperLeft.getY() + height;
+
     }
 
     public void move(double dx, double dy) {

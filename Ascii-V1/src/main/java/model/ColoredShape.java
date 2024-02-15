@@ -1,7 +1,7 @@
 package model;
 
 public abstract class ColoredShape implements Shape {
-    char color;
+    private char color;
 
     ColoredShape(char color) {
         this.color = color;

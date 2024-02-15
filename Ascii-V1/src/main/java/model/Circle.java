@@ -1,8 +1,8 @@
 package model;
 
 public class Circle extends ColoredShape {
-    Point center;
-    double radius;
+    private Point center;
+    private final double radius;
 
     Circle(Point center, double radius, char color) {
         super(color);
