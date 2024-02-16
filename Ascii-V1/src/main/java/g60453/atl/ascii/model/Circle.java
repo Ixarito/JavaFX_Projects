@@ -1,4 +1,4 @@
-package model;
+package g60453.atl.ascii.model;
 
 public class Circle extends ColoredShape {
     private Point center;

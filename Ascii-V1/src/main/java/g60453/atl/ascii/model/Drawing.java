@@ -1,5 +1,4 @@
-package model;
-import java.util.Collection;
+package g60453.atl.ascii.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
@@ -59,19 +58,5 @@ public class Drawing{
             }
         }
         return null;
-    }
-
-    public void draw(){
-        for (int i = 0; i < height; i++){
-            for (int j = 0; j < width; j++){
-                Point p = new Point(i, j);
-                if (getShape(p) != null){
-                    System.out.print(" " + getShape(p).getColor() + " ");
-                } else {
-                    System.out.print("   ");
-                }
-            }
-            System.out.println();
-        }
     }
 }

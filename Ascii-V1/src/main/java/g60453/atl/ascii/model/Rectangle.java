@@ -1,4 +1,4 @@
-package model;
+package g60453.atl.ascii.model;
 
 public class Rectangle extends ColoredShape {
     private final Point upperLeft;

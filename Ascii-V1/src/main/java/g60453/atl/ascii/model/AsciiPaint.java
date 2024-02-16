@@ -1,4 +1,4 @@
-package model;
+package g60453.atl.ascii.model;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ public class AsciiPaint {
 
     public String asAscii(){
         StringBuilder output = new StringBuilder();
-        for (int i = 0; i < drawing.getHeight(); i++){
-            for (int j = 0; j < drawing.getWidth(); j++){
-                Point p = new Point(i, j);
+        for (int y = 0; y < drawing.getHeight(); y++){
+            for (int x = 0; x < drawing.getWidth(); x++){
+                Point p = new Point(x, y);
                 if (drawing.getShape(p) != null){
                     //envlopper output d'une couleur verte
                     output.append(" \u001B[38;5;46m").append(drawing.getShape(p).getColor()).append(" \u001B[0m");
@@ -37,9 +37,10 @@ public class AsciiPaint {
         for (int i = 0; i < shapes.size(); i++){
             output.append(i).append(". ").append(shapes.get(i).toString()).append("\n");
         }
+        if (shapes.size() == 0){
+            return null;
+        }
         return output.toString();
-        
-        
     }
 
     public void newCircle(int x, int y, double radius, char color){

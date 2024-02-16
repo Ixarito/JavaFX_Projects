@@ -1,4 +1,4 @@
-package model;
+package g60453.atl.ascii.model;
 
 public interface Shape {
     boolean isInside(Point p);

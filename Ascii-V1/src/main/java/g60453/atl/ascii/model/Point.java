@@ -1,4 +1,4 @@
-package model;
+package g60453.atl.ascii.model;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
@@ -26,8 +26,8 @@ public class Point {
     }
 
     public void move(double dx, double dy) {
-        this.x += dx;
-        this.y += dy;
+        this.x = dx;
+        this.y = dy;
     }
 
     double distanceTo(Point p) {

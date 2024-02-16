@@ -1,4 +1,4 @@
-package model;
+package g60453.atl.ascii.model;
 
 public class Square extends Rectangle {
     Square(Point upperLeft, double side, char color) {

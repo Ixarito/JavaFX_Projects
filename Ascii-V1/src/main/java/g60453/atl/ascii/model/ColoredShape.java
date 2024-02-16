@@ -1,4 +1,4 @@
-package model;
+package g60453.atl.ascii.model;
 
 public abstract class ColoredShape implements Shape {
     private char color;

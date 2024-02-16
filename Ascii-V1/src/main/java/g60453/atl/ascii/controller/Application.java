@@ -1,22 +1,42 @@
-package Controller;
+package g60453.atl.ascii.controller;
 
-import model.AsciiPaint;
+import g60453.atl.ascii.model.AsciiPaint;
 
 import java.util.Scanner;
 
-import View.View;
-import model.Point;
+import g60453.atl.ascii.view.View;
 
 public class Application {
 
-    AsciiPaint paint = new AsciiPaint(30, 20);
+
 
 
     void start() {
+        View.welcome();
         Scanner scanner = new Scanner(System.in);
+        AsciiPaint paint;
+
+        while (true){
+            System.out.println("Enter the width and the heigh of the drawing like this : 16 9");
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = command.split(" ");
+            try {
+                if (parts.length != 2){
+                    throw new Exception("Parameters missing or to many parameters");
+                }
+                int width = Integer.parseInt(parts[0]);
+                int height = Integer.parseInt(parts[1]);
+                paint = new AsciiPaint(width, height);
+                View.gridSuccess();
+                break;
+            } catch (Exception e){
+                View.errorInCommand();
+            }
+        }
 
 
         while (true) {
+            View.shell();
             String command = scanner.nextLine().toLowerCase();
             String[] parts = command.split(" ");
             switch (parts[0]) {
@@ -87,7 +107,7 @@ public class Application {
                         int index = Integer.parseInt(parts[1]);
                         double dx = Double.parseDouble(parts[2]);
                         double dy = Double.parseDouble(parts[3]);
-                        View.moveSuccess();
+                        paint.moveShape(index, dx, dy);
                     } catch (Exception e) {
                         View.errorInCommand();
                         break;
@@ -121,7 +141,8 @@ public class Application {
                     }
                     View.removeSuccess();
                     break;
-                case "exit", "quit", "Alt+F4" :
+                case "exit", "alt+f4":
+                    View.exit();
                     return;
                 case "help":
                     View.help();
