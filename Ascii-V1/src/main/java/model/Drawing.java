@@ -1,4 +1,6 @@
 package model;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 public class Drawing{
@@ -18,9 +20,37 @@ public class Drawing{
         this.width = width;
     }
 
+    public int getHeight(){
+        return height;
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
+    public List<Shape> getShapes() {
+        return Collections.unmodifiableList(shapes);
+    }
+
+
     public void addShape(Shape shape){
         shapes.add(shape);
     }
+
+
+    public void removeShape(int index){
+        shapes.remove(index);
+    }
+
+    public void setColor(int index, char newColor){
+        shapes.get(index).setColor(newColor);
+    }
+
+
+    public void moveShape(int index, double dx, double dy){
+        shapes.get(index).move(dx, dy);
+    }
+
 
     public Shape getShape(Point p){
         for (Shape s : shapes) {
@@ -31,22 +61,14 @@ public class Drawing{
         return null;
     }
 
-    int getHeight(){
-        return height;
-    }
-
-    int getWidth(){
-        return width;
-    }
-
-    public void shellDrawAllShapes(){
+    public void draw(){
         for (int i = 0; i < height; i++){
             for (int j = 0; j < width; j++){
                 Point p = new Point(i, j);
                 if (getShape(p) != null){
-                    System.out.print(getShape(p).getColor());
+                    System.out.print(" " + getShape(p).getColor() + " ");
                 } else {
-                    System.out.print(" ");
+                    System.out.print("   ");
                 }
             }
             System.out.println();

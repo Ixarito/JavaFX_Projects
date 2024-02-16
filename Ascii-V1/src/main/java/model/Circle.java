@@ -18,4 +18,8 @@ public class Circle extends ColoredShape {
     public void move(double dx, double dy) {
         center.move(dx, dy);
     }
+
+    public String toString() {
+        return "Circle";
+    }
 }

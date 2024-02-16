@@ -20,4 +20,8 @@ public class Rectangle extends ColoredShape {
     public void move(double dx, double dy) {
         upperLeft.move(dx, dy);
     }
+
+    public String toString() {
+        return "Rectangle";
+    }
 }

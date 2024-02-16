@@ -5,4 +5,7 @@ public class Square extends Rectangle {
         super(upperLeft, side, side, color);
     }
 
+    public String toString() {
+        return "Square";
+    }
 }
