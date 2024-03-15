@@ -1,5 +1,6 @@
 package g60453.atl.ascii.controller.Commands;
 
+import g60453.atl.ascii.controller.Exceptions.InvalidCommandException;
 import g60453.atl.ascii.model.AsciiPaint;
 
 public class CommandGroup implements Command {
@@ -13,7 +14,7 @@ public class CommandGroup implements Command {
     }
 
     @Override
-    public void execute(String... parts) throws Exception {
+    public void execute(String... parts) throws InvalidCommandException {
         int[] indexes = new int[parts.length - 1];
         for(int i = 0; i < indexes.length; i++){ // remove the -1 here
             indexes[i] = Integer.parseInt(parts[i+1]);

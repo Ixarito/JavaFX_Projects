@@ -1,5 +1,6 @@
 package g60453.atl.ascii.controller.Commands;
 
+import g60453.atl.ascii.controller.Exceptions.InvalidCommandException;
 import g60453.atl.ascii.model.AsciiPaint;
 
 public class CommandColor implements Command {
@@ -14,9 +15,9 @@ public class CommandColor implements Command {
     }
 
     @Override
-    public void execute(String... parts) throws Exception {
+    public void execute(String... parts) throws InvalidCommandException {
         if (parts.length != 3) {
-            throw new Exception("Parameters missing or to many parameters");
+            throw new InvalidCommandException("Parameters missing or to many parameters");
         }
         int shapeIndex = Integer.parseInt(parts[1]);
         char newColor = parts[2].charAt(0);

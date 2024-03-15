@@ -1,5 +1,6 @@
 package g60453.atl.ascii.controller.Commands;
 
+import g60453.atl.ascii.controller.Exceptions.InvalidCommandException;
 import g60453.atl.ascii.model.AsciiPaint;
 
 public class CommandUngroup implements Command {
@@ -13,9 +14,9 @@ public class CommandUngroup implements Command {
     }
 
     @Override
-    public void execute(String... parts) throws Exception {
+    public void execute(String... parts) throws InvalidCommandException {
         if (parts.length != 2) {
-            throw new Exception("Parameters missing or to many parameters");
+            throw new InvalidCommandException("Parameters missing or to many parameters");
         }
         lastGroupSize = paint.ungroup(Integer.parseInt(parts[1]));
     }

@@ -59,6 +59,9 @@ public class View {
         System.out.println("\u001B[38;5;196mAn error occurred\u001B[0m");
     }
 
+    public static void displayError(String errorMessage) {
+        System.out.println("\u001B[38;5;196m" + errorMessage + "\u001B[0m");
+    }
 
     public static void unknownCommand() {
         System.out.println("\u001B[38;5;196mUnknown command\u001B[0m");

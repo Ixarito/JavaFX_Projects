@@ -1,6 +1,7 @@
 package g60453.atl.ascii.controller;
 
 import g60453.atl.ascii.controller.Commands.*;
+import g60453.atl.ascii.controller.Exceptions.InvalidCommandException;
 import g60453.atl.ascii.model.AsciiPaint;
 
 import java.util.ArrayList;
@@ -46,10 +47,6 @@ public class Application {
         MyCommandManager.register("ungroup", new CommandUngroup(paint));
         MyCommandManager.register("delete", new CommandDelete(paint));
 
-        paint.newCircle(5, 5, 3, 'o');
-        paint.newRectangle(10, 10, 5, 5, 'x');
-        paint.newSquare(2, 2, 3, 'y');
-        paint.group(0, 1);
 
         //AsciiPaint Loop
         while (true) {
@@ -65,7 +62,10 @@ public class Application {
                     }
                     case "show" -> View.printDrawing(paint.asAscii());
 
-                    case "list" -> View.printShapeList(paint.getShapesString());
+                    case "list" -> {
+                        View.list();
+                        View.printShapeList(paint.getShapesString());
+                    }
 
                     case "move" -> {
                         MyCommandManager.execute("move", parts);
@@ -94,11 +94,12 @@ public class Application {
                     case "help" -> View.help();
 
                     case "undo" -> MyCommandManager.undo();
-                    case "redo"-> MyCommandManager.redo();
                     default -> View.unknownCommand();
                 }
+            } catch (InvalidCommandException e) {
+                View.displayError(e.getMessage());
             } catch (Exception e) {
-                View.errorInCommand();
+                View.genericError();
             }
         }
     }

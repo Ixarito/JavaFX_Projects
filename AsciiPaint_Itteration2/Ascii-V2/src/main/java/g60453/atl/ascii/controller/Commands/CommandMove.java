@@ -1,5 +1,6 @@
 package g60453.atl.ascii.controller.Commands;
 
+import g60453.atl.ascii.controller.Exceptions.InvalidCommandException;
 import g60453.atl.ascii.model.AsciiPaint;
 
 public class CommandMove implements Command {
@@ -15,7 +16,7 @@ public class CommandMove implements Command {
     }
 
     @Override
-    public void execute(String... parts) throws Exception {
+    public void execute(String... parts) throws InvalidCommandException {
         int index = Integer.parseInt(parts[1]);
         double dx = Double.parseDouble(parts[2]);
         double dy = Double.parseDouble(parts[3]);
