@@ -87,6 +87,14 @@ public class View {
         System.out.println("\u001B[38;5;51mShape removed successfully\u001B[0m");
     }
 
+    public static void groupSuccess() {
+        System.out.println("\u001B[38;5;51mShapes grouped successfully\u001B[0m");
+    }
+
+    public static void ungroupSuccess() {
+        System.out.println("\u001B[38;5;51mShapes ungrouped successfully\u001B[0m");
+    }
+
     public static void exit() {
         System.out.println("\u001B[38;5;196mshutting down...\u001B[0m");
     }

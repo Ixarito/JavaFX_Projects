@@ -24,4 +24,9 @@ public class Rectangle extends ColoredShape {
     public String toString() {
         return "Rectangle";
     }
+
+    @Override
+    public Point getPoint() {
+        return new Point(upperLeft);
+    }
 }

@@ -6,4 +6,8 @@ public interface ShapeCompenent {
 
     void setColor(char newColor);
     char getColor();
+
+    Point getPoint();
+
+    public String toString();
 }

@@ -1,5 +1,6 @@
 package g60453.atl.ascii.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AsciiPaint {
@@ -42,6 +43,10 @@ public class AsciiPaint {
         return output.toString();
     }
 
+    public List<ShapeCompenent> getShapes(){
+        return drawing.getShapes();
+    }
+
     public void newCircle(int x, int y, double radius, char color){
         drawing.addShape(new ShapeLeaf(new Circle(new Point(x, y), radius, color)));
     }
@@ -70,7 +75,11 @@ public class AsciiPaint {
         drawing.group(indexes);
     }
 
-    public void ungroup(int index){
-        drawing.ungroup(index);
+    public int ungroup(int index){
+        return drawing.ungroup(index);
+    }
+
+    public void SetIndexShape(int index, ShapeCompenent shape){
+        drawing.SetIndexShape(index, shape);
     }
 }

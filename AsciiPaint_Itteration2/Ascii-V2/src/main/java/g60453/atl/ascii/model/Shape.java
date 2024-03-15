@@ -6,4 +6,6 @@ public interface Shape {
 
     void setColor(char newColor);
     char getColor();
+
+    Point getPoint();
 }

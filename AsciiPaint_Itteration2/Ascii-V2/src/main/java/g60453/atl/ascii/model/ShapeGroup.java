@@ -26,6 +26,11 @@ public class ShapeGroup implements ShapeCompenent {
         return shapes.get(0).getColor();
     }
 
+    @Override
+    public Point getPoint() {
+        return shapes.get(0).getPoint();
+    }
+
     public boolean isInside(Point p) {
         for (ShapeCompenent shape : shapes) {
             if (shape.isInside(p)) {
@@ -39,6 +44,7 @@ public class ShapeGroup implements ShapeCompenent {
     public String toString() {
         return "group" + shapes.toString();
     }
+
 
     public ArrayList<ShapeCompenent> getShapes() {
         return shapes;

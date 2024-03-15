@@ -1,5 +1,6 @@
 package g60453.atl.ascii.controller;
 
+import g60453.atl.ascii.controller.Commands.*;
 import g60453.atl.ascii.model.AsciiPaint;
 
 import java.util.ArrayList;
@@ -10,15 +11,12 @@ import g60453.atl.ascii.view.View;
 public class Application {
 
 
-
-    public void exit(){
-        System.exit(0);
-    }
-
     void start() {
+        AsciiPaint paint;
         View.welcome();
         Scanner scanner = new Scanner(System.in);
-        AsciiPaint paint;
+
+
 
         while (true){
             System.out.println("Enter the width and the heigh of the drawing like this : 16 9");
@@ -38,100 +36,69 @@ public class Application {
             }
         }
 
-        //only a test
-        paint.newCircle(5, 5, 3, 'r');
-        paint.newRectangle(1, 1, 5, 3, 'b');
-        paint.newSquare(10, 10, 4, 'g');
-        paint.newCircle(10, 10, 2, 'y');
-        paint.group(0, 1, 2);
+        //Initialisation of commands
+        CommandManager MyCommandManager = new CommandManager();
+        MyCommandManager.register("add", new CommandAdd(paint));
+        MyCommandManager.register("move", new CommandMove(paint));
+        MyCommandManager.register("color", new CommandColor(paint));
+        MyCommandManager.register("delete", new CommandDelete(paint));
+        MyCommandManager.register("group", new CommandGroup(paint));
+        MyCommandManager.register("ungroup", new CommandUngroup(paint));
+        MyCommandManager.register("delete", new CommandDelete(paint));
+
+        paint.newCircle(5, 5, 3, 'o');
+        paint.newRectangle(10, 10, 5, 5, 'x');
+        paint.newSquare(2, 2, 3, 'y');
         paint.group(0, 1);
-        paint.ungroup(0);
 
-
+        //AsciiPaint Loop
         while (true) {
 
             View.shell();
             String command = scanner.nextLine().toLowerCase();
             String[] parts = command.split(" ");
-            switch (parts[0]) {
-                case "add":
-                    try {
+            try {
+                switch (parts[0]) {
+                    case "add" -> {
+                        MyCommandManager.execute("add", parts);
+                        View.addSuccess();
+                    }
+                    case "show" -> View.printDrawing(paint.asAscii());
 
-                    } catch (Exception e) {
-                        View.errorInCommand();
-                        break;
+                    case "list" -> View.printShapeList(paint.getShapesString());
+
+                    case "move" -> {
+                        MyCommandManager.execute("move", parts);
+                        View.moveSuccess();
                     }
-                    View.addSuccess();
-                    break;
-                case "show":
-                    try {
-                        if (parts.length != 1) {
-                            View.errorInCommand();
-                            break;
-                        }
-                        View.printDrawing(paint.asAscii());
-                    } catch (Exception e) {
-                        View.genericError();
+                    case "color" -> {
+                        MyCommandManager.execute("color", parts);
+                        View.colorSuccess();
                     }
-                    break;
-                case "list":
-                    try {
-                        if (parts.length != 1) {
-                            View.errorInCommand();
-                            break;
-                        }
-                        View.printShapeList(paint.getShapesString());
-                    } catch (Exception e) {
-                        View.genericError();
+                    case "group" -> {
+                        MyCommandManager.execute("group", parts);
+                        View.groupSuccess();
                     }
-                    break;
-                case "move":
-                    try {
-                        int index = Integer.parseInt(parts[1]);
-                        double dx = Double.parseDouble(parts[2]);
-                        double dy = Double.parseDouble(parts[3]);
-                        paint.moveShape(index, dx, dy);
-                    } catch (Exception e) {
-                        View.errorInCommand();
-                        break;
+                    case "ungroup" -> {
+                        MyCommandManager.execute("ungroup", parts);
+                        View.ungroupSuccess();
                     }
-                    View.moveSuccess();
-                    break;
-                case "color":
-                    try {
-                        if (parts.length != 3) {
-                            throw new Exception("Parameters missing or to many parameters");
-                        }
-                        int shapeIndex = Integer.parseInt(parts[1]);
-                        char newColor = parts[2].charAt(0);
-                        paint.setColor(shapeIndex, newColor);
-                    } catch (Exception e) {
-                        View.errorInCommand();
-                        break;
+                    case "delete" -> {
+                        MyCommandManager.execute("delete", parts);
+                        View.removeSuccess();
                     }
-                    View.colorSuccess();
-                    break;
-                case "remove":
-                    try {
-                        if (parts.length != 2) {
-                            throw new Exception("Parameters missing or to many parameters");
-                        }
-                        int index = Integer.parseInt(parts[1]);
-                        paint.removeShape(index);
-                    } catch (Exception e) {
-                        View.errorInCommand();
-                        break;
+                    case "exit", "alt+f4" -> {
+                        View.exit();
+                        return;
                     }
-                    View.removeSuccess();
-                    break;
-                case "exit", "alt+f4":
-                    View.exit();
-                    return;
-                case "help":
-                    View.help();
-                    break;
-                default:
-                    View.unknownCommand();
+                    case "help" -> View.help();
+
+                    case "undo" -> MyCommandManager.undo();
+                    case "redo"-> MyCommandManager.redo();
+                    default -> View.unknownCommand();
+                }
+            } catch (Exception e) {
+                View.errorInCommand();
             }
         }
     }

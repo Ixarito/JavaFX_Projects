@@ -1,14 +1,21 @@
 package g60453.atl.ascii.controller.Commands;
 
 import g60453.atl.ascii.model.AsciiPaint;
+import g60453.atl.ascii.model.ShapeCompenent;
 import g60453.atl.ascii.view.View;
 
 public class CommandAdd implements Command {
 
     private AsciiPaint paint;
 
+    private int lastShapeIndex;
+
+    public CommandAdd(AsciiPaint paint) {
+        this.paint = paint;
+    }
+
     @Override
-    public boolean execute(String... parts) throws Exception {
+    public void execute(String... parts) throws Exception {
         switch (parts[1]) {
             case "circle" -> {
                 if (parts.length != 6) {
@@ -43,11 +50,16 @@ public class CommandAdd implements Command {
             }
             default -> {
                 View.errorInCommand();
-                return false;
+                throw new Exception("Invalid shape");
             }
         }
 
-        return true;
+        lastShapeIndex = paint.getShapes().size()-1;
+    }
+
+    @Override
+    public void unexecute() {
+        paint.removeShape(lastShapeIndex);
     }
 
 }

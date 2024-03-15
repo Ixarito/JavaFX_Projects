@@ -54,10 +54,16 @@ public class Drawing{
         shapes.add(group);
     }
 
-    public void ungroup(int index){
+    /**
+     *
+     * @param index
+     * @return the size of the group, used in case of an undo
+     */
+    public int ungroup(int index){
         ShapeGroup group = (ShapeGroup) shapes.get(index);
         shapes.remove(index);
         shapes.addAll(group.getShapes());
+        return group.getShapes().size();
     }
 
     public void setColor(int index, char newColor){
@@ -77,5 +83,14 @@ public class Drawing{
             }
         }
         return null;
+    }
+
+    /**
+     * Set a shape in the list at an index, used only for undo
+     * @param index
+     * @param shape
+     */
+    public void SetIndexShape(int index, ShapeCompenent shape){
+        shapes.add(index, shape);
     }
 }
