@@ -7,6 +7,9 @@ public class View {
     public static void help() {
         String helpMessage = "\u001B[38;5;51mCOMMANDS:\u001B[0m\n" +
                 "\u001B[38;5;46m. Add [shape] [parameters]\u001B[0m => Add a shape to the drawing. Parameters depend on the shape.\n" +
+                "\u001B[38;5;46m    - Circle [x] [y] [radius] [color]\u001B[0m => Add a circle. x and y are the coordinates of the center, radius is the radius of the circle, color is the color of the circle.\n" +
+                "\u001B[38;5;46m    - Rectangle [x] [y] [width] [height] [color]\u001B[0m => Add a rectangle. x and y are the coordinates of the upper left corner, width and height are the dimensions of the rectangle, color is the color of the rectangle.\n" +
+                "\u001B[38;5;46m    - Square [x] [y] [side] [color]\u001B[0m => Add a square. x and y are the coordinates of the upper left corner, side is the length of the side of the square, color is the color of the square.\n" +
                 "\u001B[38;5;46m. Show\u001B[0m => Display the current state of the drawing\n" +
                 "\u001B[38;5;46m. List\u001B[0m => List all shapes in the drawing\n" +
                 "\u001B[38;5;46m. Move [index] [dx] [dy]\u001B[0m => Move a shape in the drawing. Index is the shape's position in the list, dx and dy are the displacement in x and y directions respectively.\n" +
