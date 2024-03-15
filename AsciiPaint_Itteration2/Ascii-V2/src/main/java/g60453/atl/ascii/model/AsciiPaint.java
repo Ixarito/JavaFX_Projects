@@ -66,8 +66,8 @@ public class AsciiPaint {
         drawing.moveShape(index, dx, dy);
     }
 
-    public void group(int index1, int index2){
-        drawing.group(index1, index2);
+    public void group(int... indexes){
+        drawing.group(indexes);
     }
 
     public void ungroup(int index){

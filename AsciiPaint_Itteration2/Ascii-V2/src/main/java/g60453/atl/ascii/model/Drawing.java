@@ -1,4 +1,5 @@
 package g60453.atl.ascii.model;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
@@ -40,17 +41,17 @@ public class Drawing{
         shapes.remove(index);
     }
 
-    public void group(int index1, int index2){
-        ShapeGroup group = new ShapeGroup();
-        group.addShape(shapes.get(index1));
-        group.addShape(shapes.get(index2));
-        if (index2 > index1){
-            shapes.remove(index2);
-            shapes.remove(index1);
-        } else {
-            shapes.remove(index1);
-            shapes.remove(index2);
-        }shapes.add(group);
+    public void group(int... indexes){
+        ShapeCompenent[] shapesArray = new ShapeCompenent[indexes.length];
+        for (int i = 0; i < indexes.length; i++){
+            shapesArray[i] = shapes.get(indexes[i]);
+        }
+        ShapeGroup group = new ShapeGroup(shapesArray);
+        Arrays.sort(indexes);
+        for (int i = indexes.length - 1; i >= 0; i--){
+            shapes.remove(indexes[i]);
+        }
+        shapes.add(group);
     }
 
     public void ungroup(int index){

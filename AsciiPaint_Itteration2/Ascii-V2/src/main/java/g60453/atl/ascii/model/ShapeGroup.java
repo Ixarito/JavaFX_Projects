@@ -1,19 +1,13 @@
 package g60453.atl.ascii.model;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ShapeGroup implements ShapeCompenent {
     private final ArrayList<ShapeCompenent> shapes;
 
-    public ShapeGroup() {
+    public ShapeGroup(ShapeCompenent... newShapes) {
         shapes = new ArrayList<ShapeCompenent>();
-    }
-
-    public void addShape(ShapeCompenent shape) {
-        shapes.add(shape);
-    }
-
-    public void removeShape(int index) {
-        shapes.remove(index);
+        shapes.addAll(Arrays.asList(newShapes));
     }
 
     public void move(double dx, double dy) {
@@ -40,6 +34,7 @@ public class ShapeGroup implements ShapeCompenent {
         }
         return false;
     }
+
 
     public String toString() {
         return "group" + shapes.toString();

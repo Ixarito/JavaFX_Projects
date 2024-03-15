@@ -38,7 +38,12 @@ public class Application {
         //only a test
         paint.newCircle(5, 5, 3, 'r');
         paint.newRectangle(1, 1, 5, 3, 'b');
+        paint.newSquare(10, 10, 4, 'g');
+        paint.newCircle(10, 10, 2, 'y');
+        paint.group(0, 1, 2);
         paint.group(0, 1);
+        paint.ungroup(0);
+        paint.ungroup(1);
 
 
         while (true) {
