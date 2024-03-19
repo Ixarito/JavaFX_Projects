@@ -1,4 +1,5 @@
 package com.example.bmr;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -48,7 +49,7 @@ public class BMRCalculatorApp extends Application {
 
 
         Button calculerBMRButton = new Button("Calcul du BMR");
-        calculerBMRButton.setMaxWidth(Double.MAX_VALUE); // Ajoutez cette ligne
+        calculerBMRButton.setMaxWidth(Double.MAX_VALUE);
 
         //Right elements
         Label bmrLabel = new Label("BMR:");
@@ -60,13 +61,11 @@ public class BMRCalculatorApp extends Application {
         caloriesTextField.setEditable(false);
 
 
-        // Création des conteneurs
+
         VBox myVBox = new VBox(10);
-        GridPane myMainGridPane = new GridPane();
         HBox myHBox = new HBox(10);
         GridPane myLeftGridPane = new GridPane();
         GridPane myRightGridPane = new GridPane();
-        //sexeToggle group
         HBox mySexeToggleButtons = new HBox(10);
 
 
