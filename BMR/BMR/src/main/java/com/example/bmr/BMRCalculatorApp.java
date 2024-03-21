@@ -5,6 +5,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -16,7 +18,6 @@ public class BMRCalculatorApp extends Application {
     //Menu
     private Menu menuFichier;
     //Menu elements
-    private MenuItem clear;
     private MenuItem exit;
     //MenuBar
     private MenuBar menuBar;
@@ -41,8 +42,9 @@ public class BMRCalculatorApp extends Application {
     private Label caloriesLabel;
     private TextField caloriesTextField;
 
-    //footer Button
+    //footer Buttons
     private Button calculerBMRButton;
+    private Button clearButton;
 
     //Containers
     private VBox myContainer;
@@ -154,6 +156,7 @@ public class BMRCalculatorApp extends Application {
         alert.showAndWait();
     }
 
+
     /**
      * This method is called when the application is launched.
      * @param primaryStage the stage
@@ -162,8 +165,9 @@ public class BMRCalculatorApp extends Application {
     public void start(Stage primaryStage) {
     //Attributes initialisation
         menuFichier = new Menu("Menu");
-        clear = new MenuItem("Effacer les champs");
-        clear.setOnAction(actionEvent -> clearTextFields());
+        clearButton = new Button("Clear");
+        clearButton.setOnAction(actionEvent -> clearTextFields());
+        clearButton.setMaxWidth(Double.MAX_VALUE);
         exit = new MenuItem("Quitter");
         exit.setOnAction(actionEvent -> exit());
         menuBar = new MenuBar();
@@ -201,13 +205,30 @@ public class BMRCalculatorApp extends Application {
         primaryStage.setTitle("Calculateur de BMR");
 
 
+    //inputs filter
+        sizeTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (!"0123456789".contains(event.getText()) && !event.getCode().equals(KeyCode.BACK_SPACE)) {
+                event.consume();
+            }
+        });
+        ageTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (!"0123456789".contains(event.getText()) && !event.getCode().equals(KeyCode.BACK_SPACE)) {
+                event.consume();
+            }
+        });
+        caloriesTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (!"0123456789".contains(event.getText()) && !event.getCode().equals(KeyCode.BACK_SPACE)) {
+                event.consume();
+            }
+        });
+
 
     // Adding elements to containers
-        menuFichier.getItems().addAll(clear, exit);
+        menuFichier.getItems().add(exit);
         menuBar.getMenus().add(menuFichier);
         myContainer.getChildren().addAll(menuBar, myVBox);
 
-        myVBox.getChildren().addAll(myHBox, calculerBMRButton);
+        myVBox.getChildren().addAll(myHBox, calculerBMRButton, clearButton);
         myHBox.getChildren().addAll(myLeftGridPane, myRightGridPane);
         myLeftGridPane.add(tailleLabel, 0, 0);
         myLeftGridPane.add(sizeTextField, 1, 0);
