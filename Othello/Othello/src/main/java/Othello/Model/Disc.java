@@ -2,7 +2,7 @@ package Othello.Model;
 
 public class Disc {
 
-    private final Color color;
+    private Color color;
 
     /**
      * Constructor for the disc
@@ -18,5 +18,13 @@ public class Disc {
      */
     public Color getColor() {
         return color;
+    }
+
+    public void flip(){
+        if(this.color.equals(Color.WHITE)){
+            this.color = Color.BLACK;
+        } else {
+            this.color = Color.WHITE;
+        }
     }
 }

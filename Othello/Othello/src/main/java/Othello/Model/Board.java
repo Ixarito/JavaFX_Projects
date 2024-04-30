@@ -13,6 +13,10 @@ public class Board {
     public Board(int size) {
         this.size = size;
         this.grid = new Disc[size][size];
+        this.grid[size / 2 - 1][size / 2 - 1] = new Disc(Color.WHITE);
+        this.grid[size / 2][size / 2] = new Disc(Color.WHITE);
+        this.grid[size / 2 - 1][size / 2] = new Disc(Color.BLACK);
+        this.grid[size / 2][size / 2 - 1] = new Disc(Color.BLACK);
     }
 
     /**
@@ -33,27 +37,27 @@ public class Board {
         return grid;
     }
 
-    public boolean isValidMove(int row, int col, char player){
+    public boolean isValidMove(int row, int col, Color playerColor) {
         //TODO
         return true;
     }
 
-    public boolean makeMove(int row, int col, char player){
+    public boolean makeMove(int row, int col, Color playerColor) {
         //TODO
         return true;
     }
 
-    public boolean isGameOver(){
+    public boolean isGameOver() {
         //TODO
         return true;
     }
 
-    public boolean getWinner(){
+    public boolean getWinner() {
         //TODO
         return true;
     }
 
-    public boolean getValidMoves(char player){
+    public boolean getValidMoves(char player) {
         //TODO
         return true;
     }
