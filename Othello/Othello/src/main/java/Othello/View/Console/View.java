@@ -4,6 +4,21 @@ import Othello.Model.Disc;
 
 public class View {
 
+    public static void printMessage(String message){
+        System.out.println(message);
+    }
+    public static void clearConsole() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+    }
+
+    public static void printError(String errorMessage){
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_RESET = "\u001B[0m";
+        System.out.println(ANSI_RED + errorMessage + ANSI_RESET);
+    }
+
     public static void printBoard(Disc[][] grid, int size){
         final String ANSI_RED = "\u001B[31m";
         final String ANSI_WHITE = "\u001B[37m";
@@ -22,4 +37,11 @@ public class View {
             System.out.println();
         }
     }
+
+    public static void printWinner(String winner){
+        System.out.println("The winner is " + winner);
+    }
+
+
+
 }

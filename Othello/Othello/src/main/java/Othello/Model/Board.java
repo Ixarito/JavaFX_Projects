@@ -177,13 +177,13 @@ public class Board {
      * @param player the player
      * @return a list of valid moves for the player
      */
-    public ArrayList<Pair<Integer, Integer>> getValidMoves(Color player) {
-        ArrayList<Pair<Integer, Integer>> validMoves = new ArrayList<>();
+    public ArrayList<Move> getValidMoves(Color player) {
+        ArrayList<Move> validMoves = new ArrayList<>();
 
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 if (isValidMove(row, col, player)) {
-                    validMoves.add(new Pair<>(row, col));
+                    validMoves.add(new Move(row, col));
                 }
             }
         }
