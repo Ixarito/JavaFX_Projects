@@ -1,5 +1,6 @@
 package Othello.Model;
 
+import Othello.View.Interface.BoardView;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -129,7 +130,6 @@ public class Board {
                 }
             }
         }
-
         return true; // The move was made
     }
 

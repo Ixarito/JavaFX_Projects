@@ -43,8 +43,12 @@ public class main {
 
             if (game.getCurrentPlayer().equals(player)) {
                 //Player's turn
-                View.printMessage("Entrez la valeur de row : ");
+                View.printMessage("Entrez la valeur de row (-1 pour passer le tour) : ");
                 int row = scanner.nextInt();
+                if (row == -1) {
+                    game.switchPlayer();
+                    continue;
+                }
 
                 View.printMessage("Entrez la valeur de col : ");
                 int col = scanner.nextInt();
@@ -54,6 +58,10 @@ public class main {
             } else {
                 //Ai's turn
                 ArrayList<Move> moves = game.getValidMoves(bot);
+                if (moves.isEmpty()) {
+                    game.switchPlayer();
+                    continue;
+                }
                 int moveIndex = (int) (Math.random() * moves.size());
                 game.makeMove(moves.get(moveIndex).getRow(), moves.get(moveIndex).getCol(), bot);
             }
