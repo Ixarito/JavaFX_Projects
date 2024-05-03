@@ -190,5 +190,19 @@ public class Board {
         return validMoves;
     }
 
+    public int countDiscs(Color color){
+        int counter = 0;
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                if (grid[row][col] != null){
+                    if (grid[row][col].getColor().equals(color)){
+                        counter++;
+                    }
+                }
+            }
+        }
+        return counter;
+    }
+
 
 }

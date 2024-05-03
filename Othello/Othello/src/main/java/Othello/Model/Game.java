@@ -1,6 +1,7 @@
 package Othello.Model;
 
-import Othello.View.Interface.BoardView;
+import Othello.View.Interface.GameInfo;
+import Othello.View.Interface.OthelloObserver;
 
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ public class Game {
     private Player currentPlayer;
     private final Board board;
 
-    private ArrayList<BoardView> boardObservers;
+    private ArrayList<OthelloObserver> boardObservers;
 
     /**
      * Constructor for the game
@@ -28,9 +29,11 @@ public class Game {
 
     /**
      * Adds an observer to the list
+     *
      * @param boardView the observer to add
+     * @param gameInfo
      */
-    public void registerObserver (BoardView boardView){
+    public void registerObserver (OthelloObserver boardView){
         boardObservers.add(boardView);
     }
 
@@ -38,7 +41,7 @@ public class Game {
      * removes an observer from the list
      * @param boardView the observer to remove
      */
-    public void removeObserver (BoardView boardView){
+    public void removeObserver (OthelloObserver boardView){
         boardObservers.remove(boardView);
     }
 
@@ -46,9 +49,17 @@ public class Game {
      * Notifies all observers
      */
     public void notifyObservers(){
-        for (BoardView view : boardObservers){
+        for (OthelloObserver view : boardObservers){
             view.update();
         }
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
     }
 
     /**
@@ -88,6 +99,7 @@ public class Game {
     public void makeMove(int row, int col, Player player){
         if (board.makeMove(row, col, player.getColor())){
             switchPlayer();
+            updateScore();
             notifyObservers();
         }
     }
@@ -97,6 +109,11 @@ public class Game {
      */
     public void switchPlayer(){
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    }
+
+    public void updateScore(){
+        player1.setScore(board.countDiscs(player1.getColor()));
+        player2.setScore(board.countDiscs(player2.getColor()));
     }
 
     /**

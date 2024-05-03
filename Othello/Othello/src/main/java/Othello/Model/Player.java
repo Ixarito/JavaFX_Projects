@@ -4,6 +4,8 @@ public class Player {
     private final String name;
     private final Color color;
 
+    private int score;
+
     /**
      * Constructor for the player
      * @param name the name of the player
@@ -12,6 +14,7 @@ public class Player {
     public Player(String name, Color color){
         this.name = name;
         this.color = color;
+        this.score = 2;
     }
 
     /**
@@ -28,5 +31,13 @@ public class Player {
      */
     public Color getColor() {
         return color;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
