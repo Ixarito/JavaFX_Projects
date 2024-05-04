@@ -34,7 +34,7 @@ public class main {
 
 
 
-        Game game = new Game(player, bot, size);
+        Game game = new Game(player, bot, size, true);
         View.printBoard(game.getBoardGrid(), game.getBoardSize());
 
 

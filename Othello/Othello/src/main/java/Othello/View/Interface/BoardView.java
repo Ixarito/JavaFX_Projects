@@ -28,7 +28,7 @@ public class BoardView extends GridPane implements OthelloObserver {
     private void createCells(int size) {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                Rectangle cell = new Rectangle(50, 50);
+                Rectangle cell = new Rectangle(100, 100);
                 if (row % 2 == 0) {
                     if (col % 2 == 0) {
                         cell.setFill(Color.rgb(107, 207, 0));
@@ -52,18 +52,18 @@ public class BoardView extends GridPane implements OthelloObserver {
     private void createDiscs(int size) {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                Circle disc = new Circle(20);
-                disc.setTranslateX(5);
+                Circle disc = new Circle(40);
 
-                // Create a drop shadow effect
+                //center the disc
+                disc.setTranslateX(10);
+
+                // Drop shadow
                 DropShadow dropShadow = new DropShadow();
-                dropShadow.setRadius(10.0);
+                dropShadow.setRadius(40.0);
                 dropShadow.setColor(Color.color(0,0,0,0.3));
-
-                // Apply the drop shadow effect to the disc
                 disc.setEffect(dropShadow);
 
-                // Add event listener for click events
+                // Event listeners
                 disc.addEventHandler(MouseEvent.MOUSE_CLICKED, new ClickDiscHandler(row, col, game));
                 disc.addEventHandler(MouseEvent.MOUSE_ENTERED, new HoverDiscHandler(row, col, game, disc));
                 disc.addEventHandler(MouseEvent.MOUSE_EXITED, new UnhoverDiscHandler(row, col, game, disc));

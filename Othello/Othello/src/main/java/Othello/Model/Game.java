@@ -10,6 +10,7 @@ public class Game {
     private final Player player2;
     private Player currentPlayer;
     private final Board board;
+    private boolean soloMode;
 
     private ArrayList<OthelloObserver> boardObservers;
 
@@ -19,19 +20,19 @@ public class Game {
      * @param player2 the second player
      * @param size the size of the board
      */
-    public Game(Player player1, Player player2, int size){
+    public Game(Player player1, Player player2, int size, boolean soloMode){
         this.player1 = player1;
         this.player2 = player2;
         currentPlayer = player1.getColor().equals(Color.BLACK) ? player1 : player2;
         this.board = new Board(size);
         boardObservers = new ArrayList<>();
+        this.soloMode = soloMode;
     }
 
     /**
      * Adds an observer to the list
      *
      * @param boardView the observer to add
-     * @param gameInfo
      */
     public void registerObserver (OthelloObserver boardView){
         boardObservers.add(boardView);
@@ -85,6 +86,10 @@ public class Game {
      */
     public int getBoardSize(){
         return board.getSize();
+    }
+
+    public boolean isSoloMode(){
+        return soloMode;
     }
 
 

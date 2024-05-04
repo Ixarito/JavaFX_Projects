@@ -21,7 +21,7 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) {
         int size = 8;
-        Game game = new Game(new Player("Ixarito", Color.BLACK), new Player("Bot", Color.WHITE), size);
+        Game game = new Game(new Player("Ixarito", Color.BLACK), new Player("Bot", Color.WHITE), size, true);
 
         // Register BoardView as an observer of Board
         borderPane = new BorderPane();
