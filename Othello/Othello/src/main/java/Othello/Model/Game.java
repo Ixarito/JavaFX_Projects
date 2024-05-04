@@ -142,6 +142,17 @@ public class Game {
     }
 
     /**
+     * Returns true if the move is valid of the current player
+     *
+     * @param row        the row of the move
+     * @param col        the column of the move
+     * @return true if the move is valid, false otherwise
+     */
+    public boolean isValidMove(int row, int col) {
+        return board.isValidMove(row, col, currentPlayer.getColor());
+    }
+
+    /**
      * Returns a list of valid moves for the player
      *
      * @param player the player

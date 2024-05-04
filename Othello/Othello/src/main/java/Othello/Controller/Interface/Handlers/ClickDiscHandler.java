@@ -1,19 +1,17 @@
 package Othello.Controller.Interface.Handlers;
 
-import Othello.Model.Board;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import Othello.Model.Game;
 
-public class CellClickHandler implements EventHandler {
+public class ClickDiscHandler implements EventHandler {
 
     int row;
     int col;
 
     Game game;
 
-    public CellClickHandler(int row, int col, Game game){
+    public ClickDiscHandler(int row, int col, Game game){
         this.row = row;
         this.col = col;
         this.game = game;
