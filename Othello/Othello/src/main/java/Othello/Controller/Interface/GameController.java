@@ -7,6 +7,7 @@ import Othello.View.Interface.Elements.MainMenu;
 import Othello.View.Interface.Elements.GameInfo;
 import Othello.View.Interface.Elements.BoardView;
 import Othello.View.Interface.Scene.GameScene;
+import Othello.View.Interface.Scene.MainMenuScene;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
@@ -27,7 +28,7 @@ public class GameController {
     public GameController(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.mainMenu = new MainMenu();
-        this.mainMenuScene = new Scene(mainMenu);
+        this.mainMenuScene = new MainMenuScene(mainMenu);
         this.primaryStage.setScene(mainMenuScene);
 
         mainMenu.getStartButton().setOnAction(actionEvent -> startGame());
