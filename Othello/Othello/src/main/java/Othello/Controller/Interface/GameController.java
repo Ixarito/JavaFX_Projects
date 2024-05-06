@@ -1,6 +1,7 @@
 package Othello.Controller.Interface;
 
 import Othello.Model.*;
+import Othello.View.Interface.Elements.GameButtons;
 import Othello.View.Interface.Elements.MainMenu;
 import Othello.View.Interface.Elements.GameInfo;
 import Othello.View.Interface.Elements.BoardView;
@@ -16,6 +17,7 @@ public class GameController {
     private MainMenu mainMenu;
     private BoardView boardView;
     private GameInfo gameInfo;
+    private GameButtons gameButtons;
     private Stage primaryStage;
 
     private Scene mainMenuScene;
@@ -86,7 +88,8 @@ public class GameController {
 
         boardView = new BoardView(game);
         gameInfo = new GameInfo(game);
-        gameScene = new GameScene(boardView, gameInfo);
+        gameButtons = new GameButtons(game);
+        gameScene = new GameScene(gameInfo, boardView, gameButtons);
 
         game.registerObserver(boardView);
         game.registerObserver(gameInfo);

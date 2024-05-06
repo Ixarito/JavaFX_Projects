@@ -35,6 +35,9 @@ public class Game {
         }
     }
 
+    /**
+     * Makes the ai move
+     */
     public void aiMove(){
         Move aiMove = aiStrategy.chooseMove(getValidMoves(player2), board, player2.getColor());
         if (aiMove != null){
@@ -50,9 +53,9 @@ public class Game {
      * @param col       the column of the move
      * @return true if the move was made, false otherwise
      */
-    public boolean makeMove(int row, int col){
+    public void makeMove(int row, int col){
         if (currentPlayer != player1){
-            return false;
+            return;
         }
         boolean move = board.makeMove(row, col, player1.getColor());
         if (move){
@@ -61,7 +64,13 @@ public class Game {
         }
         updateScore();
         notifyObservers();
-        return move;
+    }
+
+    public void skipMove(){
+        switchPlayer();
+        aiMove();
+        updateScore();
+        notifyObservers();
     }
 
     /**

@@ -2,6 +2,7 @@ package Othello.View.Interface.Scene;
 
 import Othello.Model.Game;
 import Othello.View.Interface.Elements.BoardView;
+import Othello.View.Interface.Elements.GameButtons;
 import Othello.View.Interface.Elements.GameInfo;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,10 +15,10 @@ import javafx.scene.paint.Color;
 public class GameScene extends Scene {
 
 
-    public GameScene(BoardView boardView, GameInfo gameInfo) {
+    public GameScene(GameInfo gameInfo, BoardView boardView, GameButtons gameButtons) {
         super(new HBox());
         VBox box = new VBox(50);
-        box.getChildren().addAll(gameInfo, boardView);
+        box.getChildren().addAll(gameInfo, boardView, gameButtons);
         box.setAlignment(Pos.CENTER);
 
 
