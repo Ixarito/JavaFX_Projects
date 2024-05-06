@@ -1,7 +1,6 @@
 package Othello.Model;
 
-import Othello.View.Interface.GameInfo;
-import Othello.View.Interface.OthelloObserver;
+import Othello.View.Interface.Elements.OthelloObserver;
 
 import java.util.ArrayList;
 

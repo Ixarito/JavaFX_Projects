@@ -1,4 +1,4 @@
-package Othello.View.Interface;
+package Othello.View.Interface.Elements;
 
 
 import javafx.scene.control.Label;

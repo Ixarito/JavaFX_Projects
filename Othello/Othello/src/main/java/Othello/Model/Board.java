@@ -1,8 +1,5 @@
 package Othello.Model;
 
-import Othello.View.Interface.BoardView;
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 
 public class Board {

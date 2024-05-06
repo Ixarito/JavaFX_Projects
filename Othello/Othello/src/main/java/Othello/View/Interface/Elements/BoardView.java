@@ -1,4 +1,4 @@
-package Othello.View.Interface;
+package Othello.View.Interface.Elements;
 
 import Othello.Controller.Interface.ActionsHandlers.ClickDiscHandler;
 import Othello.View.Interface.VisualHandlers.HoverDiscHandler;
