@@ -95,8 +95,8 @@ public class GameController {
 
         primaryStage.setScene(gameScene);
 
-//        primaryStage.setFullScreen(true);
-//        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
     }
 

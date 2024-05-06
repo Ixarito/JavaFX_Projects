@@ -10,14 +10,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import Othello.Model.*;
+import javafx.stage.Screen;
 
 public class BoardView extends GridPane implements OthelloObserver {
+    double screenHeight;
     private Rectangle[][] cells;
     private Circle[][] discs;
     private Game game;
 
     public BoardView(Game game) {
         this.game = game;
+        screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
         int size = game.getBoardSize();
         cells = new Rectangle[size][size];
         discs = new Circle[size][size];
@@ -28,7 +31,7 @@ public class BoardView extends GridPane implements OthelloObserver {
     private void createCells(int size) {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                Rectangle cell = new Rectangle(100, 100);
+                Rectangle cell = new Rectangle((screenHeight-400)/size, (screenHeight-400)/size);
                 if (row % 2 == 0) {
                     if (col % 2 == 0) {
                         cell.setFill(Color.rgb(107, 207, 0));
@@ -50,12 +53,19 @@ public class BoardView extends GridPane implements OthelloObserver {
     }
 
     private void createDiscs(int size) {
+
+        double cellSize = (screenHeight-400)/size;
+        double discRadius = cellSize/2 - cellSize/10; // 10% padding
+        double discTranslation = cellSize/10; // 10% translation
+
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                Circle disc = new Circle(40);
+
+
+                Circle disc = new Circle((discRadius));
 
                 //center the disc
-                disc.setTranslateX(10);
+                disc.setTranslateX(discTranslation);
 
                 // Drop shadow
                 DropShadow dropShadow = new DropShadow();

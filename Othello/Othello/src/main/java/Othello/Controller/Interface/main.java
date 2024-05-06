@@ -13,8 +13,8 @@ public class main extends Application {
         GameController gameController = new GameController(primaryStage);
 
         primaryStage.setTitle("Othello");
-//        primaryStage.setFullScreen(true);
-//        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.show();
 
     }
