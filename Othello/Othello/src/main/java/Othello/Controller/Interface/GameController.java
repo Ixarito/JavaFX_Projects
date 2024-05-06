@@ -1,8 +1,6 @@
 package Othello.Controller.Interface;
 
-import Othello.Model.Color;
-import Othello.Model.Game;
-import Othello.Model.Player;
+import Othello.Model.*;
 import Othello.View.Interface.Elements.MainMenu;
 import Othello.View.Interface.Elements.GameInfo;
 import Othello.View.Interface.Elements.BoardView;
@@ -48,7 +46,7 @@ public class GameController {
         Color p2Color;
         if (colorName == null) {
             return;
-        } else if (colorName.equals("noir")){
+        } else if (colorName.equals("Noir")){
             p1Color = Color.BLACK;
             p2Color = Color.WHITE;
         } else {
@@ -70,13 +68,13 @@ public class GameController {
 
         //difficulty
         String difficultyName = mainMenu.getDifficultyChoice().getValue();
-        boolean difficulty;
+        AiStrategy aiStrategy;
         if (difficultyName == null) {
             return;
-        } else if (difficultyName.equals("facile")){
-            difficulty = false;
+        } else if (difficultyName.equals("Facile")){
+            aiStrategy = new EasyAi();
         } else {
-            difficulty = true;
+            aiStrategy = new HardAi();
         }
 
         //creation of players
@@ -84,7 +82,7 @@ public class GameController {
         Player player2 = new Player("Bot", p2Color);
 
         //gameCreation
-        game = new Game(player1, player2, size, difficulty);
+        game = new Game(player1, player2, size, aiStrategy);
 
         boardView = new BoardView(game);
         gameInfo = new GameInfo(game);
@@ -96,8 +94,9 @@ public class GameController {
 
 
         primaryStage.setScene(gameScene);
-        primaryStage.setFullScreen(true);
-        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
+//        primaryStage.setFullScreen(true);
+//        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
     }
 

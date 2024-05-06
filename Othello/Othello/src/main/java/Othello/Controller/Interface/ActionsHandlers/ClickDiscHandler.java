@@ -22,15 +22,6 @@ public class ClickDiscHandler implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        if (game.makeMove(row, col, game.getCurrentPlayer()) && game.isSoloMode()){
-            //Ai's turn
-            ArrayList<Move> moves = game.getValidMoves(game.getCurrentPlayer());
-            if (moves.isEmpty()) {
-                game.switchPlayer();
-                return;
-            }
-            int moveIndex = (int) (Math.random() * moves.size());
-            game.makeMove(moves.get(moveIndex).getRow(), moves.get(moveIndex).getCol(), game.getCurrentPlayer());
-        }
+        game.makeMove(row, col);
     }
 }

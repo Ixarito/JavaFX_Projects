@@ -131,6 +131,52 @@ public class Board {
     }
 
     /**
+     * Count the number of flipped disks for a possible movement
+     *
+     * @param row        the row of the move
+     * @param col        the column of the move
+     * @param playerColor the color of the player
+     * @return the number of flips
+     */
+    public int getFlips(int row, int col, Color playerColor) {
+        int flips = 0;
+
+        Color opponentColor = (playerColor == Color.WHITE) ? Color.BLACK : Color.WHITE;
+
+        for (Direction direction : Direction.values()) {
+            int newRow = row + direction.getRowChange();
+            int newCol = col + direction.getColumnChange();
+
+
+            if (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size && grid[newRow][newCol] != null && grid[newRow][newCol].getColor() == opponentColor) {
+                newRow += direction.getRowChange();
+                newCol += direction.getColumnChange();
+
+
+                while (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size) {
+                    if (grid[newRow][newCol] == null) {
+                        break;
+                    } else if (grid[newRow][newCol].getColor() == playerColor) {
+
+                        int flipRow = row + direction.getRowChange();
+                        int flipCol = col + direction.getColumnChange();
+                        while (flipRow != newRow || flipCol != newCol) {
+                            flips++;
+                            flipRow += direction.getRowChange();
+                            flipCol += direction.getColumnChange();
+                        }
+                        break;
+                    }
+
+                    newRow += direction.getRowChange();
+                    newCol += direction.getColumnChange();
+                }
+            }
+        }
+        return flips;
+    }
+
+    /**
      * Returns true if the game is over
      *
      * @return true or false if the game is over
