@@ -1,4 +1,4 @@
-package Othello.Controller.Interface.Handlers;
+package Othello.Controller.Interface.ActionsHandlers;
 
 import Othello.Model.Move;
 import javafx.event.Event;
@@ -22,8 +22,7 @@ public class ClickDiscHandler implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        game.makeMove(row, col, game.getCurrentPlayer());
-        if (game.isSoloMode()){
+        if (game.makeMove(row, col, game.getCurrentPlayer()) && game.isSoloMode()){
             //Ai's turn
             ArrayList<Move> moves = game.getValidMoves(game.getCurrentPlayer());
             if (moves.isEmpty()) {

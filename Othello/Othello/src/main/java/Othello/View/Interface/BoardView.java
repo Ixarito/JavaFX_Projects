@@ -1,8 +1,8 @@
 package Othello.View.Interface;
 
-import Othello.Controller.Interface.Handlers.ClickDiscHandler;
-import Othello.Controller.Interface.Handlers.HoverDiscHandler;
-import Othello.Controller.Interface.Handlers.UnhoverDiscHandler;
+import Othello.Controller.Interface.ActionsHandlers.ClickDiscHandler;
+import Othello.View.Interface.VisualHandlers.HoverDiscHandler;
+import Othello.View.Interface.VisualHandlers.UnhoverDiscHandler;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -82,6 +82,7 @@ public class BoardView extends GridPane implements OthelloObserver {
                 Disc disc = game.getBoardGrid()[row][col];
                 if (disc != null) {
                     if (disc.getColor() == Othello.Model.Color.BLACK) {
+
                         discs[row][col].setFill(Color.BLACK);
                     } else {
                         discs[row][col].setFill(Color.WHITE);

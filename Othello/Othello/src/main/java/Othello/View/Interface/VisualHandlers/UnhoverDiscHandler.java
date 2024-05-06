@@ -1,12 +1,10 @@
-package Othello.Controller.Interface.Handlers;
+package Othello.View.Interface.VisualHandlers;
 
 import Othello.Model.Game;
-import javafx.animation.FadeTransition;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
 
 public class UnhoverDiscHandler implements EventHandler<MouseEvent> {
 

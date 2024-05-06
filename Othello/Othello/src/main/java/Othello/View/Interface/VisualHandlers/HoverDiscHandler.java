@@ -1,4 +1,4 @@
-package Othello.Controller.Interface.Handlers;
+package Othello.View.Interface.VisualHandlers;
 
 import Othello.Model.Game;
 import javafx.animation.FadeTransition;

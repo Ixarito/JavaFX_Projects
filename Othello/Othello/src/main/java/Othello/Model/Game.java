@@ -101,12 +101,14 @@ public class Game {
      * @param player    the  player
      * @return true if the move was made, false otherwise
      */
-    public void makeMove(int row, int col, Player player){
-        if (board.makeMove(row, col, player.getColor())){
+    public boolean makeMove(int row, int col, Player player){
+        boolean move = board.makeMove(row, col, player.getColor());
+        if (move){
             switchPlayer();
             updateScore();
             notifyObservers();
         }
+        return move;
     }
 
     /**
