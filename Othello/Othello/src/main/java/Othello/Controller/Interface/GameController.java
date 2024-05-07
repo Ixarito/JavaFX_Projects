@@ -1,12 +1,17 @@
 package Othello.Controller.Interface;
 
+import Othello.Controller.Interface.ActionsHandlers.EscKeyEventHandler;
 import Othello.Model.*;
 import Othello.View.Interface.Elements.*;
 import Othello.View.Interface.Scene.EndGameScene;
+import Othello.View.Interface.Scene.GameMenuScene;
 import Othello.View.Interface.Scene.GameScene;
 import Othello.View.Interface.Scene.MainMenuScene;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 
@@ -15,12 +20,17 @@ public class GameController implements ControllerObserver {
     private MainMenu mainMenu;
     private BoardView boardView;
     private GameInfo gameInfo;
+    private GameMenu gameMenu;
     private GameButtons gameButtons;
     private EndGameMenu endGameMenu;
     private Stage primaryStage;
     private Scene mainMenuScene;
     private Scene endGameScene;
     private Scene gameScene;
+    private Scene gameMenuScene;
+    private Scene currentScene;
+
+    EscKeyEventHandler escKeyEventHandler;
 
 
     public GameController(Stage primaryStage) {
@@ -30,6 +40,17 @@ public class GameController implements ControllerObserver {
         this.primaryStage.setScene(mainMenuScene);
 
         mainMenu.getStartButton().setOnAction(actionEvent -> startGame());
+    }
+
+    private void switchScene() {
+        if (currentScene == gameScene) {
+            currentScene = gameMenuScene;
+        } else {
+            currentScene = gameScene;
+        }
+        primaryStage.setScene(currentScene);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     }
 
     public void startGame() {
@@ -86,9 +107,14 @@ public class GameController implements ControllerObserver {
 
         boardView = new BoardView(game);
         gameInfo = new GameInfo(game);
+        gameMenu = new GameMenu();
         gameButtons = new GameButtons(game);
         gameScene = new GameScene(gameInfo, boardView, gameButtons);
+        gameMenuScene = new GameMenuScene(gameMenu);
 
+        escKeyEventHandler = new EscKeyEventHandler(primaryStage, gameScene, gameMenuScene, currentScene);
+        gameScene.addEventFilter(KeyEvent.KEY_PRESSED, escKeyEventHandler);
+        gameMenuScene.addEventFilter(KeyEvent.KEY_PRESSED, escKeyEventHandler);
         game.registerObserver(boardView);
         game.registerObserver(gameInfo);
         game.registerEndGameObserver(this);

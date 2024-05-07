@@ -1,12 +1,16 @@
 package Othello.View.Interface.Elements;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class MainMenu extends VBox {
+    private Label titleLabbel;
     private TextField nameInput;
     private ComboBox<String> difficultyChoice;
     private ComboBox<String> colorChoise;
@@ -14,6 +18,10 @@ public class MainMenu extends VBox {
     private Button startButton;
 
     public MainMenu() {
+        titleLabbel = new Label("Bienvenue Dans Othello");
+        titleLabbel.setTextFill(Color.WHITE);
+        titleLabbel.setStyle("-fx-font-size: 60px;");
+
         nameInput = new TextField();
         nameInput.setPromptText("Entrez votre nom");
         nameInput.setStyle("-fx-font-size: 20px;");
@@ -35,9 +43,9 @@ public class MainMenu extends VBox {
         startButton = new Button("Lancer la partie");
         startButton.setStyle("-fx-font-size: 20px;");
 
-        this.getChildren().addAll(nameInput, boardSizeInput, colorChoise, difficultyChoice, startButton);
-        this.setPadding(new Insets(10));
-        this.setSpacing(8);
+        this.getChildren().addAll(titleLabbel, nameInput, boardSizeInput, colorChoise, difficultyChoice, startButton);
+        this.setSpacing(20);
+        this.setAlignment(Pos.CENTER);
     }
 
     public TextField getNameInput() {

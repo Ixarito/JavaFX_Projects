@@ -14,18 +14,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class EndGameScene extends Scene {
+public class GameMenuScene extends Scene {
 
-    public EndGameScene(EndGameMenu endGameMenu) {
+
+    public GameMenuScene(GameMenu GameMenu) {
         super(new HBox());
         VBox box = new VBox();
-        box.getChildren().addAll(endGameMenu);
+        box.getChildren().addAll(GameMenu);
         box.setAlignment(Pos.CENTER);
 
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(500);
         dropShadow.setColor(Color.rgb(255, 255, 255, 0.5));
-        endGameMenu.setEffect(dropShadow);
+        GameMenu.setEffect(dropShadow);
 
         HBox root = (HBox) this.getRoot();
         root.getChildren().add(box);

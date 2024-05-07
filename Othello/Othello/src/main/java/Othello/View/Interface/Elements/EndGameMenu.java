@@ -17,10 +17,10 @@ public class EndGameMenu extends VBox {
     Button quitButton;
 
     public EndGameMenu(Player winner) {
-        winnerLabbel = new Label();
-        winnerLabbel.setText("Le gagnant : " + winner.getName());
+        String winnerText = (winner == null) ? "Match null" : "Le gagnant est : " + winner.getName();
+        winnerLabbel = new Label(winnerText);
         winnerLabbel.setTextFill(Color.WHITE);
-        winnerLabbel.setStyle("-fx-font-size: 20px;");
+        winnerLabbel.setStyle("-fx-font-size: 50px;");
 
         restartButton = new Button("Rejouer");
         restartButton.setStyle("-fx-font-size: 20px;");
