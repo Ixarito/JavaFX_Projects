@@ -20,10 +20,10 @@ public class GameMenu extends VBox {
         winnerLabbel.setTextFill(Color.WHITE);
         winnerLabbel.setStyle("-fx-font-size: 20px;");
 
-        undoButton = new Button("Undo ");
+        undoButton = new Button("Undo");
         undoButton.setStyle("-fx-font-size: 20px;");
 
-        redoButton = new Button("Redo ");
+        redoButton = new Button("Redo");
         redoButton.setStyle("-fx-font-size: 20px;");
 
         giveUpButton = new Button("Arrêter la partie");
