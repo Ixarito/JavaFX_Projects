@@ -34,6 +34,8 @@ public class Game {
         //if ai's color is white made the first move
         if (player2.equals(currentPlayer)){
             aiMove();
+            updateScore();
+            notifyObservers();
         }
     }
 
@@ -195,9 +197,9 @@ public class Game {
      */
     public Player getWinner(){
         Color winnerColor = board.getWinner();
-        if (winnerColor == Color.BLACK){
+        if (winnerColor == player1.getColor()){
             return player1;
-        } else if (winnerColor == Color.WHITE){
+        } else if (winnerColor == player2.getColor()){
             return player2;
         } else {
             return null;

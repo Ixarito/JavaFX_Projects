@@ -1,17 +1,20 @@
 package Othello.Controller.Interface;
 
-import Othello.Controller.Interface.ActionsHandlers.EscKeyEventHandler;
+import Othello.Controller.Interface.Handlers.ClickDiscHandler;
+import Othello.Controller.Interface.Handlers.EscKeyEventHandler;
 import Othello.Model.*;
 import Othello.View.Interface.Elements.*;
 import Othello.View.Interface.Scene.EndGameScene;
 import Othello.View.Interface.Scene.GameMenuScene;
 import Othello.View.Interface.Scene.GameScene;
 import Othello.View.Interface.Scene.MainMenuScene;
-import javafx.event.EventHandler;
+import Othello.Controller.Interface.Handlers.HoverDiscHandler;
+import Othello.Controller.Interface.Handlers.UnhoverDiscHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 
@@ -105,16 +108,42 @@ public class GameController implements ControllerObserver {
         //gameCreation
         game = new Game(player1, player2, size, aiStrategy);
 
+        //BoardView
         boardView = new BoardView(game);
-        gameInfo = new GameInfo(game);
-        gameMenu = new GameMenu();
-        gameButtons = new GameButtons(game);
-        gameScene = new GameScene(gameInfo, boardView, gameButtons);
-        gameMenuScene = new GameMenuScene(gameMenu);
+            //event handlers
+        Circle[][] discs = boardView.getDiscs();
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                discs[row][col].addEventHandler(MouseEvent.MOUSE_CLICKED, new ClickDiscHandler(row, col, game));
+                discs[row][col].addEventHandler(MouseEvent.MOUSE_ENTERED, new HoverDiscHandler(row, col, game, discs[row][col]));
+                discs[row][col].addEventHandler(MouseEvent.MOUSE_EXITED, new UnhoverDiscHandler(row, col, game, discs[row][col]));
+            }
+        }
 
+
+        //gameMenu
+        gameMenu = new GameMenu();
+
+
+        //gameInfo
+        gameInfo = new GameInfo(game);
+
+        //gameButtons
+        gameButtons = new GameButtons(game);
+
+        //Game scene
+        gameScene = new GameScene(gameInfo, boardView, gameButtons);
+        //GameMenu scene
+        gameMenuScene = new GameMenuScene(gameMenu);
+            //event handlers (for gameMenuScene and gameScene)
+        currentScene = gameScene;
         escKeyEventHandler = new EscKeyEventHandler(primaryStage, gameScene, gameMenuScene, currentScene);
         gameScene.addEventFilter(KeyEvent.KEY_PRESSED, escKeyEventHandler);
         gameMenuScene.addEventFilter(KeyEvent.KEY_PRESSED, escKeyEventHandler);
+        gameMenu.getQuitButton().setOnAction(actionEvent -> System.exit(0));
+        gameMenu.getGiveUpButton().setOnAction(actionEvent -> update(game.getWinner()));
+
+
         game.registerObserver(boardView);
         game.registerObserver(gameInfo);
         game.registerEndGameObserver(this);
@@ -136,7 +165,9 @@ public class GameController implements ControllerObserver {
 
     @Override
     public void update(Player player) {
+        //endGameMenu
         endGameMenu = new EndGameMenu(player);
+            //event handlers
         endGameMenu.getQuitButton().setOnAction(actionEvent -> System.exit(0));
         endGameMenu.getRestartButton().setOnAction(actionEvent ->backToMenu());
 

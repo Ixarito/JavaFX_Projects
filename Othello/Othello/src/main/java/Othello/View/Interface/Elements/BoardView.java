@@ -1,10 +1,7 @@
 package Othello.View.Interface.Elements;
 
-import Othello.Controller.Interface.ActionsHandlers.ClickDiscHandler;
-import Othello.View.Interface.VisualHandlers.HoverDiscHandler;
-import Othello.View.Interface.VisualHandlers.UnhoverDiscHandler;
+
 import javafx.scene.effect.DropShadow;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -73,17 +70,15 @@ public class BoardView extends GridPane implements ViewObserver {
                 dropShadow.setColor(Color.color(0,0,0,0.3));
                 disc.setEffect(dropShadow);
 
-                // Event listeners
-                disc.addEventHandler(MouseEvent.MOUSE_CLICKED, new ClickDiscHandler(row, col, game));
-                disc.addEventHandler(MouseEvent.MOUSE_ENTERED, new HoverDiscHandler(row, col, game, disc));
-                disc.addEventHandler(MouseEvent.MOUSE_EXITED, new UnhoverDiscHandler(row, col, game, disc));
-
                 discs[row][col] = disc;
                 add(disc, col, row);
             }
         }
     }
 
+    public Circle[][] getDiscs() {
+        return discs;
+    }
 
     @Override
     public void update() {

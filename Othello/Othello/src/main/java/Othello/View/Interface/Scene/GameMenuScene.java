@@ -1,13 +1,8 @@
 package Othello.View.Interface.Scene;
 
-import Othello.Controller.Interface.ActionsHandlers.SkipButtonHandler;
-import Othello.Model.Game;
-import Othello.Model.Player;
 import Othello.View.Interface.Elements.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;

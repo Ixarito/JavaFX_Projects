@@ -26,7 +26,7 @@ public class GameMenu extends VBox {
         redoButton = new Button("Redo ");
         redoButton.setStyle("-fx-font-size: 20px;");
 
-        giveUpButton = new Button("Abandonner ");
+        giveUpButton = new Button("Arrêter la partie");
         giveUpButton.setStyle("-fx-font-size: 20px;");
 
         quitButton = new Button("Quitter");

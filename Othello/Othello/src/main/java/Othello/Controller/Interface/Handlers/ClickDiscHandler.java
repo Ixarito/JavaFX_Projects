@@ -1,11 +1,8 @@
-package Othello.Controller.Interface.ActionsHandlers;
+package Othello.Controller.Interface.Handlers;
 
-import Othello.Model.Move;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import Othello.Model.Game;
-
-import java.util.ArrayList;
 
 public class ClickDiscHandler implements EventHandler {
 

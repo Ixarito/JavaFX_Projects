@@ -1,4 +1,4 @@
-package Othello.Controller.Interface.ActionsHandlers;
+package Othello.Controller.Interface.Handlers;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
