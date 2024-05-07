@@ -76,6 +76,9 @@ public class Game {
         aiMove();
         updateScore();
         notifyObservers();
+        if (isGameOver()){
+            notifyEndGameObservers(getWinner());
+        }
     }
 
     /**
