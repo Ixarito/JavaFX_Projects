@@ -1,5 +1,5 @@
 package Othello.View.Interface.Elements;
 
-public interface OthelloObserver {
+public interface ViewObserver {
     void update();
 }

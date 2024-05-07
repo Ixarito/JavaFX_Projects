@@ -10,7 +10,7 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        GameController gameController = new GameController(primaryStage);
+        new GameController(primaryStage);
 
         primaryStage.setTitle("Othello");
         primaryStage.setFullScreen(true);

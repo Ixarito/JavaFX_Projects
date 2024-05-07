@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import Othello.Model.Game;
 import javafx.scene.paint.Color;
 
-public class GameInfo extends HBox implements OthelloObserver {
+public class GameInfo extends HBox implements ViewObserver {
 
     private Game game;
 

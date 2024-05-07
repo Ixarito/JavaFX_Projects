@@ -1,6 +1,8 @@
 package Othello.Model;
 
-import Othello.View.Interface.Elements.OthelloObserver;
+import Othello.Controller.Interface.ControllerObserver;
+import Othello.Controller.Interface.GameController;
+import Othello.View.Interface.Elements.ViewObserver;
 
 import java.util.ArrayList;
 
@@ -9,10 +11,10 @@ public class Game {
     private final Player player2;
     private Player currentPlayer;
     private final Board board;
-
     private AiStrategy aiStrategy;
+    private ArrayList<ViewObserver> boardObservers;
+    private ArrayList<ControllerObserver> endGameObservers;
 
-    private ArrayList<OthelloObserver> boardObservers;
 
     /**
      * Constructor for the game
@@ -25,9 +27,9 @@ public class Game {
         this.player2 = player2;
         currentPlayer = player1.getColor().equals(Color.BLACK) ? player1 : player2;
         this.board = new Board(size);
-        boardObservers = new ArrayList<>();
         this.aiStrategy = aiStrategy;
-
+        boardObservers = new ArrayList<>();
+        endGameObservers = new ArrayList<>();
 
         //if ai's color is white made the first move
         if (player2.equals(currentPlayer)){
@@ -64,6 +66,9 @@ public class Game {
         }
         updateScore();
         notifyObservers();
+        if (isGameOver()){
+            notifyEndGameObservers(getWinner());
+        }
     }
 
     public void skipMove(){
@@ -76,26 +81,52 @@ public class Game {
     /**
      * Adds an observer to the list
      *
-     * @param boardView the observer to add
+     * @param observer the observer to add
      */
-    public void registerObserver (OthelloObserver boardView){
-        boardObservers.add(boardView);
+    public void registerObserver (ViewObserver observer){
+        boardObservers.add(observer);
     }
 
     /**
      * removes an observer from the list
-     * @param boardView the observer to remove
+     * @param observer the observer to remove
      */
-    public void removeObserver (OthelloObserver boardView){
-        boardObservers.remove(boardView);
+    public void removeObserver (ViewObserver observer){
+        boardObservers.remove(observer);
+    }
+
+    /**
+     * Adds an observer to the list
+     *
+     * @param observer the observer to add
+     */
+    public void registerEndGameObserver (ControllerObserver observer){
+        endGameObservers.add(observer);
+    }
+
+    /**
+     * removes an observer from the list
+     * @param observer the observer to remove
+     */
+    public void removeEndGameObserver (ControllerObserver observer){
+        endGameObservers.remove(observer);
     }
 
     /**
      * Notifies all observers
      */
     public void notifyObservers(){
-        for (OthelloObserver view : boardObservers){
+        for (ViewObserver view : boardObservers){
             view.update();
+        }
+    }
+
+    /**
+     * Notifies all observers
+     */
+    public void notifyEndGameObservers(Player player){
+        for (ControllerObserver controller : endGameObservers){
+            controller.update(player);
         }
     }
 

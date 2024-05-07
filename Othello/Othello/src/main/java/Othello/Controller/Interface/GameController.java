@@ -1,10 +1,8 @@
 package Othello.Controller.Interface;
 
 import Othello.Model.*;
-import Othello.View.Interface.Elements.GameButtons;
-import Othello.View.Interface.Elements.MainMenu;
-import Othello.View.Interface.Elements.GameInfo;
-import Othello.View.Interface.Elements.BoardView;
+import Othello.View.Interface.Elements.*;
+import Othello.View.Interface.Scene.EndGameScene;
 import Othello.View.Interface.Scene.GameScene;
 import Othello.View.Interface.Scene.MainMenuScene;
 import javafx.scene.Scene;
@@ -12,16 +10,16 @@ import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 
-public class GameController {
+public class GameController implements ControllerObserver {
     private Game game;
     private MainMenu mainMenu;
     private BoardView boardView;
     private GameInfo gameInfo;
     private GameButtons gameButtons;
+    private EndGameMenu endGameMenu;
     private Stage primaryStage;
-
     private Scene mainMenuScene;
-
+    private Scene endGameScene;
     private Scene gameScene;
 
 
@@ -93,6 +91,7 @@ public class GameController {
 
         game.registerObserver(boardView);
         game.registerObserver(gameInfo);
+        game.registerEndGameObserver(this);
         game.notifyObservers();
 
 
@@ -103,4 +102,23 @@ public class GameController {
 
     }
 
+    private void backToMenu(){
+        primaryStage.setScene(mainMenuScene);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+    }
+
+    @Override
+    public void update(Player player) {
+        endGameMenu = new EndGameMenu(player);
+        endGameMenu.getQuitButton().setOnAction(actionEvent -> System.exit(0));
+        endGameMenu.getRestartButton().setOnAction(actionEvent ->backToMenu());
+
+        endGameScene = new EndGameScene(endGameMenu);
+
+        primaryStage.setScene(endGameScene);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
+    }
 }

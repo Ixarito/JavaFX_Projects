@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 import Othello.Model.*;
 import javafx.stage.Screen;
 
-public class BoardView extends GridPane implements OthelloObserver {
+public class BoardView extends GridPane implements ViewObserver {
     double screenHeight;
     private Rectangle[][] cells;
     private Circle[][] discs;
