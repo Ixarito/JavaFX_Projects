@@ -20,6 +20,6 @@ public class MoveCommand implements Command {
 
     @Override
     public void unexecute() {
-//        game.undoMove(row, col);
+        game.undoMove();
     }
 }

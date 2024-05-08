@@ -1,15 +1,13 @@
 package Othello.Controller.Interface;
 
-import Othello.Controller.Interface.Handlers.ClickDiscHandler;
-import Othello.Controller.Interface.Handlers.EscKeyEventHandler;
+import Othello.Controller.Commands.CommandManager;
+import Othello.Controller.Interface.Handlers.*;
 import Othello.Model.*;
 import Othello.View.Interface.Elements.*;
 import Othello.View.Interface.Scene.EndGameScene;
 import Othello.View.Interface.Scene.GameMenuScene;
 import Othello.View.Interface.Scene.GameScene;
 import Othello.View.Interface.Scene.MainMenuScene;
-import Othello.Controller.Interface.Handlers.HoverDiscHandler;
-import Othello.Controller.Interface.Handlers.UnhoverDiscHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -32,8 +30,8 @@ public class GameController implements ControllerObserver {
     private Scene gameScene;
     private Scene gameMenuScene;
     private Scene currentScene;
-
-    EscKeyEventHandler escKeyEventHandler;
+    private EscKeyEventHandler escKeyEventHandler;
+    private CommandManager commandManager;
 
 
     public GameController(Stage primaryStage) {
@@ -41,19 +39,8 @@ public class GameController implements ControllerObserver {
         this.mainMenu = new MainMenu();
         this.mainMenuScene = new MainMenuScene(mainMenu);
         this.primaryStage.setScene(mainMenuScene);
-
+        this.commandManager = new CommandManager();
         mainMenu.getStartButton().setOnAction(actionEvent -> startGame());
-    }
-
-    private void switchScene() {
-        if (currentScene == gameScene) {
-            currentScene = gameMenuScene;
-        } else {
-            currentScene = gameScene;
-        }
-        primaryStage.setScene(currentScene);
-        primaryStage.setFullScreen(true);
-        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     }
 
     public void startGame() {
@@ -114,7 +101,7 @@ public class GameController implements ControllerObserver {
         Circle[][] discs = boardView.getDiscs();
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                discs[row][col].addEventHandler(MouseEvent.MOUSE_CLICKED, new ClickDiscHandler(row, col, game));
+                discs[row][col].addEventHandler(MouseEvent.MOUSE_CLICKED, new ClickDiscHandler(row, col, game, commandManager));
                 discs[row][col].addEventHandler(MouseEvent.MOUSE_ENTERED, new HoverDiscHandler(row, col, game, discs[row][col]));
                 discs[row][col].addEventHandler(MouseEvent.MOUSE_EXITED, new UnhoverDiscHandler(row, col, game, discs[row][col]));
             }
@@ -130,12 +117,15 @@ public class GameController implements ControllerObserver {
 
         //gameButtons
         gameButtons = new GameButtons(game);
+        gameButtons.getStartButton().setOnAction(new SkipButtonHandler(game));
+        gameButtons.getUndoButton().setOnAction(new UndoButtonHandler(commandManager));
+        gameButtons.getRedoButton().setOnAction(new RedoButtonHandler(commandManager));
 
         //Game scene
         gameScene = new GameScene(gameInfo, boardView, gameButtons);
         //GameMenu scene
         gameMenuScene = new GameMenuScene(gameMenu);
-            //event handlers (for gameMenuScene and gameScene)
+        //event handlers (for gameMenuScene and gameScene)
         currentScene = gameScene;
         escKeyEventHandler = new EscKeyEventHandler(primaryStage, gameScene, gameMenuScene, currentScene);
         gameScene.addEventFilter(KeyEvent.KEY_PRESSED, escKeyEventHandler);

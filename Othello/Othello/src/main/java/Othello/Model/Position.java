@@ -3,11 +3,11 @@ package Othello.Model;
 /**
  * Represents a move on the board
  */
-public class Move {
+public class Position {
     private final int row;
     private final int col;
 
-    public Move(int row, int col) {
+    public Position(int row, int col) {
         this.row = row;
         this.col = col;
     }

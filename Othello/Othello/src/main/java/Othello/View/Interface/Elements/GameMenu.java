@@ -10,8 +10,6 @@ import javafx.scene.paint.Color;
 public class GameMenu extends VBox {
 
     Label winnerLabbel;
-    Button undoButton;
-    Button redoButton;
     Button giveUpButton;
     Button quitButton;
 
@@ -19,12 +17,6 @@ public class GameMenu extends VBox {
         winnerLabbel = new Label("Partie en pause");
         winnerLabbel.setTextFill(Color.WHITE);
         winnerLabbel.setStyle("-fx-font-size: 20px;");
-
-        undoButton = new Button("Undo");
-        undoButton.setStyle("-fx-font-size: 20px;");
-
-        redoButton = new Button("Redo");
-        redoButton.setStyle("-fx-font-size: 20px;");
 
         giveUpButton = new Button("Arrêter la partie");
         giveUpButton.setStyle("-fx-font-size: 20px;");
@@ -36,14 +28,6 @@ public class GameMenu extends VBox {
         this.setPadding(new Insets(10));
         this.setSpacing(40);
         this.setAlignment(Pos.CENTER);
-    }
-
-    public Button getUndoButton() {
-        return undoButton;
-    }
-
-    public Button getRedoButton() {
-        return redoButton;
     }
 
     public Button getGiveUpButton() {

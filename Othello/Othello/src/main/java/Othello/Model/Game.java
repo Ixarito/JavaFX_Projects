@@ -1,10 +1,10 @@
 package Othello.Model;
 
 import Othello.Controller.Interface.ControllerObserver;
-import Othello.Controller.Interface.GameController;
 import Othello.View.Interface.Elements.ViewObserver;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Game {
     private final Player player1;
@@ -14,6 +14,7 @@ public class Game {
     private AiStrategy aiStrategy;
     private ArrayList<ViewObserver> boardObservers;
     private ArrayList<ControllerObserver> endGameObservers;
+    private Stack<ArrayList<Position>> lastMoves;
 
 
     /**
@@ -30,6 +31,7 @@ public class Game {
         this.aiStrategy = aiStrategy;
         boardObservers = new ArrayList<>();
         endGameObservers = new ArrayList<>();
+        lastMoves = new Stack<>();
 
         //if ai's color is white made the first move
         if (player2.equals(currentPlayer)){
@@ -43,9 +45,9 @@ public class Game {
      * Makes the ai move
      */
     public void aiMove(){
-        Move aiMove = aiStrategy.chooseMove(getValidMoves(player2), board, player2.getColor());
+        Position aiMove = aiStrategy.chooseMove(getValidMoves(player2), board, player2.getColor());
         if (aiMove != null){
-            board.makeMove(aiMove.getRow(),aiMove.getCol(), player2.getColor());
+            lastMoves.push(board.makeMove(aiMove.getRow(),aiMove.getCol(), player2.getColor()));
         }
         switchPlayer();
     }
@@ -61,8 +63,9 @@ public class Game {
         if (currentPlayer != player1){
             return;
         }
-        boolean move = board.makeMove(row, col, player1.getColor());
-        if (move){
+        ArrayList<Position> move = board.makeMove(row, col, player1.getColor());
+        if (move != null){
+            lastMoves.push(move);
             switchPlayer();
             aiMove();
         }
@@ -81,6 +84,17 @@ public class Game {
         if (isGameOver()){
             notifyEndGameObservers(getWinner());
         }
+    }
+
+    public void undoMove(){
+        if (lastMoves.size() <= 2){
+            return;
+        }
+        for (int i = 0; i < 2; i++){
+            board.undoMove(lastMoves.pop());
+        }
+        updateScore();
+        notifyObservers();
     }
 
     /**
@@ -223,7 +237,7 @@ public class Game {
      * @param player the player
      * @return a list of valid moves for the player
      */
-    public ArrayList<Move> getValidMoves(Player player){
+    public ArrayList<Position> getValidMoves(Player player){
         return board.getValidMoves(player.getColor());
     }
 

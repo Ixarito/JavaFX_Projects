@@ -88,12 +88,15 @@ public class Board {
      * @param playerColor the color of the player
      * @return true if the move was made, false otherwise
      */
-    public boolean makeMove(int row, int col, Color playerColor) {
+    public ArrayList<Position> makeMove(int row, int col, Color playerColor) {
         if (!isValidMove(row, col, playerColor)) {
-            return false;
+            return null;
         }
 
         grid[row][col] = new Disc(playerColor);
+
+        ArrayList<Position> flippedDisks = new ArrayList<>();
+        flippedDisks.add(new Position(row, col));
 
         Color opponentColor = (playerColor == Color.WHITE) ? Color.BLACK : Color.WHITE;
 
@@ -116,6 +119,7 @@ public class Board {
                         int flipCol = col + direction.getColumnChange();
                         while (flipRow != newRow || flipCol != newCol) {
                             grid[flipRow][flipCol].flip();
+                            flippedDisks.add(new Position(flipRow, flipCol));
                             flipRow += direction.getRowChange();
                             flipCol += direction.getColumnChange();
                         }
@@ -127,7 +131,19 @@ public class Board {
                 }
             }
         }
-        return true; // The move was made
+        return flippedDisks;
+    }
+
+    /**
+     * Undo the last move
+     *
+     * @param flippedDisks the list of flipped disks (the first disk is the new disk that was added to the board, it will be deleted)
+     */
+    public void undoMove(ArrayList<Position> flippedDisks){
+        for (Position position : flippedDisks){
+            grid[position.getRow()][position.getCol()].flip();
+        }
+        grid[flippedDisks.get(0).getRow()][flippedDisks.get(0).getCol()] = null;
     }
 
     /**
@@ -157,7 +173,6 @@ public class Board {
                     if (grid[newRow][newCol] == null) {
                         break;
                     } else if (grid[newRow][newCol].getColor() == playerColor) {
-
                         int flipRow = row + direction.getRowChange();
                         int flipCol = col + direction.getColumnChange();
                         while (flipRow != newRow || flipCol != newCol) {
@@ -167,7 +182,6 @@ public class Board {
                         }
                         break;
                     }
-
                     newRow += direction.getRowChange();
                     newCol += direction.getColumnChange();
                 }
@@ -220,13 +234,13 @@ public class Board {
      * @param player the player
      * @return a list of valid moves for the player
      */
-    public ArrayList<Move> getValidMoves(Color player) {
-        ArrayList<Move> validMoves = new ArrayList<>();
+    public ArrayList<Position> getValidMoves(Color player) {
+        ArrayList<Position> validMoves = new ArrayList<>();
 
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 if (isValidMove(row, col, player)) {
-                    validMoves.add(new Move(row, col));
+                    validMoves.add(new Position(row, col));
                 }
             }
         }
