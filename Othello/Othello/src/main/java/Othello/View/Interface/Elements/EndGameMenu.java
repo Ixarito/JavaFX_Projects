@@ -12,9 +12,9 @@ import javafx.scene.paint.Color;
 
 public class EndGameMenu extends VBox {
 
-    Label winnerLabbel;
-    Button restartButton;
-    Button quitButton;
+    private Label winnerLabbel;
+    private Button restartButton;
+    private Button quitButton;
 
     public EndGameMenu(Player winner) {
         String winnerText = (winner == null) ? "Match null" : "Le gagnant est : " + winner.getName();

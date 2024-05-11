@@ -7,7 +7,7 @@ public enum Direction {
      * Returns the change in row for the direction
      * @return the change in row for the direction
      */
-    public int getRowChange(){
+    int getRowChange(){
         switch(this){
             case UP:
             case UP_LEFT:
@@ -26,7 +26,7 @@ public enum Direction {
      * Returns the change in column for the direction
      * @return the change in column for the direction
      */
-    public int getColumnChange(){
+    int getColumnChange(){
         switch(this){
             case LEFT:
             case UP_LEFT:

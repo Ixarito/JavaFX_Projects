@@ -9,9 +9,9 @@ import javafx.scene.paint.Color;
 
 public class GameMenu extends VBox {
 
-    Label winnerLabbel;
-    Button giveUpButton;
-    Button quitButton;
+    private Label winnerLabbel;
+    private Button giveUpButton;
+    private Button quitButton;
 
     public GameMenu() {
         winnerLabbel = new Label("Partie en pause");

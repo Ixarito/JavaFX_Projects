@@ -8,10 +8,10 @@ import Othello.Model.Game;
 
 public class ClickDiscHandler implements EventHandler {
 
-    int row;
-    int col;
-    Game game;
-    CommandManager commandManager;
+    private int row;
+    private int col;
+    private Game game;
+    private CommandManager commandManager;
 
     public ClickDiscHandler(int row, int col, Game game, CommandManager commandManager){
         this.row = row;

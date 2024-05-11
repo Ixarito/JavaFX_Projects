@@ -8,7 +8,7 @@ public class Disc {
      * Constructor for the disc
      * @param color the color of the disc
      */
-    public Disc(Color color){
+    Disc(Color color){
         this.color = color;
     }
 
@@ -16,11 +16,11 @@ public class Disc {
      * Returns the color of the disc
      * @return the color of the disc
      */
-    public Color getColor() {
+     public Color getColor() {
         return color;
     }
 
-    public void flip(){
+    void flip(){
         if(this.color.equals(Color.WHITE)){
             this.color = Color.BLACK;
         } else {

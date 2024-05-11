@@ -15,7 +15,7 @@ public class HoverDiscHandler implements EventHandler<MouseEvent> {
     private Game game;
     private Circle disc;
 
-    FadeTransition fadeTransition;
+    private FadeTransition fadeTransition;
 
 
     public HoverDiscHandler(int row, int col, Game game, Circle disc){

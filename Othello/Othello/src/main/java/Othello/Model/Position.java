@@ -3,20 +3,20 @@ package Othello.Model;
 /**
  * Represents a move on the board
  */
-public class Position {
+class Position {
     private final int row;
     private final int col;
 
-    public Position(int row, int col) {
+    Position(int row, int col) {
         this.row = row;
         this.col = col;
     }
 
-    public int getCol() {
+    int getCol() {
         return col;
     }
 
-    public int getRow() {
+    int getRow() {
         return row;
     }
 }

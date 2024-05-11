@@ -6,7 +6,7 @@ import javafx.event.EventHandler;
 
 public class SkipButtonHandler implements EventHandler {
 
-    Game game;
+    private Game game;
 
     public SkipButtonHandler(Game game) {
         this.game = game;

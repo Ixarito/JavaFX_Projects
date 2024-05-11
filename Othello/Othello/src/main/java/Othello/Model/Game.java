@@ -44,7 +44,7 @@ public class Game {
     /**
      * Makes the ai move
      */
-    public void aiMove(){
+    void aiMove(){
         Position aiMove = aiStrategy.chooseMove(getValidMoves(player2), board, player2.getColor());
         if (aiMove != null){
             lastMoves.push(board.makeMove(aiMove.getRow(),aiMove.getCol(), player2.getColor()));
@@ -186,11 +186,11 @@ public class Game {
     /**
      * Switches the current player
      */
-    public void switchPlayer(){
+    private void switchPlayer(){
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
-    public void updateScore(){
+    private void updateScore(){
         player1.setScore(board.countDiscs(player1.getColor()));
         player2.setScore(board.countDiscs(player2.getColor()));
     }
@@ -237,7 +237,7 @@ public class Game {
      * @param player the player
      * @return a list of valid moves for the player
      */
-    public ArrayList<Position> getValidMoves(Player player){
+    private ArrayList<Position> getValidMoves(Player player){
         return board.getValidMoves(player.getColor());
     }
 
